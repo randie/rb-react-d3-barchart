@@ -53,7 +53,7 @@ export default class D3Chart {
         .domain([d3.min(data, d => d.height) * 0.95, d3.max(data, d => d.height)])
         .range([height, 0]);
 
-      const xAxisGenerate = d3.axisBottom(xScale);
+      const xAxisGenerate = d3.axisBottom(xScale).tickSize(0).tickPadding(6);
       const yAxisGenerate = d3.axisLeft(yScale);
 
       svg.append('g').attr('transform', `translate(0, ${height})`).call(xAxisGenerate);
