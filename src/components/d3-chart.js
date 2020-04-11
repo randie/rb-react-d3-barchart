@@ -27,20 +27,38 @@ const url = 'http://localhost:4000/tallestMen';
 ]]
 */
 
+const WIDTH = 800;
+const HEIGHT = 500;
+
 export default class D3Chart {
   constructor(element) {
-    const svg = d3.select(element.current).append('svg').attr('width', 800).attr('height', 500);
+    const svg = d3
+      .select(element.current)
+      .append('svg')
+      .attr('width', WIDTH)
+      .attr('height', HEIGHT);
 
     d3.json(url).then(data => {
+      const yScale = d3
+        .scaleLinear()
+        .domain([0, d3.max(data, d => d.height)])
+        .range([0, HEIGHT]);
+
+      const xScale = d3
+        .scaleBand()
+        .domain(data.map(d => d.name))
+        .range([0, WIDTH])
+        .padding(0.4);
+
       svg
         .selectAll('rect')
         .data(data)
         .enter()
         .append('rect')
-        .attr('x', (d, i) => i * 100)
-        .attr('y', 0)
-        .attr('width', 50)
-        .attr('height', d => d.height)
+        .attr('x', d => xScale(d.name))
+        .attr('y', d => HEIGHT - yScale(d.height))
+        .attr('width', xScale.bandwidth)
+        .attr('height', d => yScale(d.height))
         .attr('fill', d => 'grey');
     });
   }
