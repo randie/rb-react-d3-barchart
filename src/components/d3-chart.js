@@ -39,6 +39,9 @@ export default class D3Chart {
       .append('g')
         .attr('transform', `translate(${margin.left}, ${margin.right})`);
 
+    this.xAxisGroup = svg.append('g').attr('transform', `translate(0, ${height})`);
+    this.yAxisGroup = svg.append('g');
+
     svg
       .append('text')
         .attr('x', width / 2)
@@ -53,9 +56,6 @@ export default class D3Chart {
         .attr('text-anchor', 'middle')
         .attr('transform', 'rotate(-90)')
         .text('Height in cm');
-
-    this.xAxisGroup = svg.append('g').attr('transform', `translate(0, ${height})`);
-    this.yAxisGroup = svg.append('g');
 
     this.svg = svg;
 
