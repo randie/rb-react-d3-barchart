@@ -86,10 +86,21 @@ export default class D3Chart {
     xAxisGroup.call(xAxisGenerate);
     yAxisGroup.call(yAxisGenerate);
 
-    svg
-      .selectAll('rect')
-      .data(data)
-      .enter()
+    // data join => update selection
+    const rects = svg.selectAll('rect').data(data);
+
+    rects
+      .exit() // => exit selection
+      .remove();
+
+    rects
+      .attr('x', d => xScale(d.name))
+      .attr('y', d => yScale(d.height))
+      .attr('width', xScale.bandwidth)
+      .attr('height', d => height - yScale(d.height));
+
+    rects
+      .enter() // => enter selection
       .append('rect')
       .attr('x', d => xScale(d.name))
       .attr('y', d => yScale(d.height))
