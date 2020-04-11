@@ -1,4 +1,26 @@
 {
+  "ages": [
+    {
+      "age": "10",
+      "name": "Tony"
+    },
+    {
+      "age": "12",
+      "name": "Jessica"
+    },
+    {
+      "age": "9",
+      "name": "Andrew"
+    },
+    {
+      "age": "10",
+      "name": "Emily"
+    },
+    {
+      "age": "11",
+      "name": "Richard"
+    }
+  ],
   "tallestMen": [
     {
       "height": "272",
