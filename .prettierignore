@@ -1,0 +1,7 @@
+.cache
+.vscode
+package.json
+yarn.lock
+public
+node_modules
+src/components/d3-*
