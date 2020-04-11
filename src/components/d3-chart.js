@@ -71,6 +71,9 @@ export default class D3Chart {
         i = (i + 1) % 2;
         this.update(data[i]);
       }, 1000);
+    }).catch(error => {
+      // TODO
+      window.alert('Oops! Failed to retrieve data. Is the database running?')
     });
   }
 
