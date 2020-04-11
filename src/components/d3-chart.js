@@ -51,7 +51,7 @@ export default class D3Chart {
       const yScale = d3
         .scaleLinear()
         .domain([0, d3.max(data, d => d.height)])
-        .range([0, height]);
+        .range([height, 0]);
 
       const xAxisGenerate = d3.axisBottom(xScale);
       const yAxisGenerate = d3.axisLeft(yScale);
@@ -65,9 +65,9 @@ export default class D3Chart {
         .enter()
         .append('rect')
         .attr('x', d => xScale(d.name))
-        .attr('y', d => height - yScale(d.height))
+        .attr('y', d => yScale(d.height))
         .attr('width', xScale.bandwidth)
-        .attr('height', d => yScale(d.height))
+        .attr('height', d => height - yScale(d.height))
         .attr('fill', d => 'grey');
     });
   }
