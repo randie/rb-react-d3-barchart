@@ -7140,6 +7140,13 @@ normalize-url@^3.0.0:
   resolved "https://registry.yarnpkg.com/normalize-url/-/normalize-url-3.3.0.tgz#b2e1c4dc4f7c6d57743df733a4f5978d18650559"
   integrity sha512-U+JJi7duF1o+u2pynbp2zXDW2/PADgC30f0GsHZtRh+HOcXHnw137TrNlyxxRvWW5fjKd3bcLHPxofWuCjaeZg==
 
+notarealdb@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/notarealdb/-/notarealdb-0.2.2.tgz#ef68b4c0b4b458e059cd90ad6ce9301be013f90c"
+  integrity sha512-mp3YjtP6pHhHTDhSFbDdEOLzRQ0Aj219ti64lsW/NZyPUxVUwSTZiTtto9Zm5C/nWyKxuO4OeaEAV61h/LAlDQ==
+  dependencies:
+    shortid "2.2.8"
+
 npm-run-path@^2.0.0:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/npm-run-path/-/npm-run-path-2.0.2.tgz#35a9232dfa35d7067b4cb2ddf2357b1871536c5f"
@@ -9448,6 +9455,11 @@ shellwords@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/shellwords/-/shellwords-0.1.1.tgz#d6b9181c1a48d397324c84871efbcfc73fc0654b"
   integrity sha512-vFwSUfQvqybiICwZY5+DAWIPLKsWO31Q91JSKl3UYv+K5c2QRPzn0qzec6QPu1Qc9eHYItiP3NdJqNVqetYAww==
+
+shortid@2.2.8:
+  version "2.2.8"
+  resolved "https://registry.yarnpkg.com/shortid/-/shortid-2.2.8.tgz#033b117d6a2e975804f6f0969dbe7d3d0b355131"
+  integrity sha1-AzsRfWoul1gE9vCWnb59PQs1UTE=
 
 side-channel@^1.0.2:
   version "1.0.2"
