@@ -27,7 +27,7 @@ const url = 'http://localhost:4000/tallestMen';
 ]]
 */
 
-const margin = { top: 10, right: 10, bottom: 50, left: 50 };
+const margin = { top: 10, right: 10, bottom: 60, left: 50 };
 const width = 800;
 const height = 500;
 
@@ -58,6 +58,13 @@ export default class D3Chart {
 
       svg.append('g').attr('transform', `translate(0, ${height})`).call(xAxisGenerate);
       svg.append('g').call(yAxisGenerate);
+
+      svg
+        .append('text')
+        .attr('x', width / 2)
+        .attr('y', height + 44)
+        .attr('text-anchor', 'middle')
+        .text("The world's tallest men");
 
       svg
         .selectAll('rect')
