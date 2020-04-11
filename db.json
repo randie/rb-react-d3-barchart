@@ -21,7 +21,7 @@
       "name": "Richard"
     }
   ],
-  "tallestMen": [
+  "tallest-men": [
     {
       "height": "272",
       "name": "Robert Wadlow"
@@ -43,7 +43,7 @@
       "name": "Väinö Myllyrinne"
     }
   ],
-  "tallestWomen": [
+  "tallest-women": [
     {
       "height": "248",
       "name": "Trijntje Keever"

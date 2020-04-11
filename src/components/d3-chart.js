@@ -1,8 +1,6 @@
 import * as d3 from 'd3';
 
-const url = 'http://localhost:4000/tallestMen';
-
-/* Sample Data from the above url
+/* Sample Data - tallest men
 [
   {
     "height": "272",
@@ -61,8 +59,18 @@ export default class D3Chart {
 
     this.svg = svg;
 
-    d3.json(url).then(data => {
-      this.update(data);
+    Promise.all([
+      d3.json('http://localhost:4000/tallest-men'),
+      d3.json('http://localhost:4000/tallest-women'),
+    ]).then(data => {
+      let i = 0;
+      this.update(data[i]);
+      d3.interval(() => {
+        // i will alternate between 0 and 1, alternating the
+        // data between tallest men and tallest women
+        i = (i + 1) % 2;
+        this.update(data[i]);
+      }, 1000);
     });
   }
 
