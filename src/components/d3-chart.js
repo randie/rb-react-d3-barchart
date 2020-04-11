@@ -50,7 +50,7 @@ export default class D3Chart {
 
       const yScale = d3
         .scaleLinear()
-        .domain([0, d3.max(data, d => d.height)])
+        .domain([d3.min(data, d => d.height) * 0.95, d3.max(data, d => d.height)])
         .range([height, 0]);
 
       const xAxisGenerate = d3.axisBottom(xScale);
