@@ -2,6 +2,31 @@ import * as d3 from 'd3';
 
 const url = 'http://localhost:4000/ages';
 
+/* Sample Data from the above url
+[
+  {
+    "age": "10",
+    "name": "Tony"
+  },
+  {
+    "age": "12",
+    "name": "Jessica"
+  },
+  {
+    "age": "9",
+    "name": "Andrew"
+  },
+  {
+    "age": "10",
+    "name": "Emily"
+  },
+  {
+    "age": "11",
+    "name": "Richard"
+  }
+]
+*/
+
 export default class D3Chart {
   constructor(element) {
     const svg = d3.select(element.current).append('svg').attr('width', 500).attr('height', 500);
