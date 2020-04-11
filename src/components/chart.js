@@ -11,11 +11,7 @@ const Chart = () => {
     return () => {};
   }, []);
 
-  return (
-    <div ref={chartRef}>
-      <h1>Chart</h1>
-    </div>
-  );
+  return <div ref={chartRef}></div>;
 };
 
 export default Chart;
