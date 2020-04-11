@@ -34,25 +34,25 @@ export default class D3Chart {
     const svg = d3
       .select(element.current)
       .append('svg')
-      .attr('width', width + margin.left + margin.right)
-      .attr('height', height + margin.top + margin.bottom)
+        .attr('width', width + margin.left + margin.right)
+        .attr('height', height + margin.top + margin.bottom)
       .append('g')
-      .attr('transform', `translate(${margin.left}, ${margin.right})`);
+        .attr('transform', `translate(${margin.left}, ${margin.right})`);
 
     svg
       .append('text')
-      .attr('x', width / 2)
-      .attr('y', height + 44)
-      .attr('text-anchor', 'middle')
-      .text("The world's tallest men"); // TODO
+        .attr('x', width / 2)
+        .attr('y', height + 44)
+        .attr('text-anchor', 'middle')
+        .text("The world's tallest men"); // TODO
 
     svg
       .append('text')
-      .attr('x', -(height / 2))
-      .attr('y', -45)
-      .attr('text-anchor', 'middle')
-      .attr('transform', 'rotate(-90)')
-      .text('Height in cm');
+        .attr('x', -(height / 2))
+        .attr('y', -45)
+        .attr('text-anchor', 'middle')
+        .attr('transform', 'rotate(-90)')
+        .text('Height in cm');
 
     this.xAxisGroup = svg.append('g').attr('transform', `translate(0, ${height})`);
     this.yAxisGroup = svg.append('g');
@@ -85,23 +85,32 @@ export default class D3Chart {
 
     const yScale = d3
       .scaleLinear()
-      .domain([d3.min(data, d => d.height) * 0.95, d3.max(data, d => d.height)])
+      .domain([
+        d3.min(data, d => d.height) * 0.95,
+        d3.max(data, d => d.height)
+      ])
       .range([height, 0]);
 
     const xAxisGenerate = d3.axisBottom(xScale).tickSize(0).tickPadding(6);
     const yAxisGenerate = d3.axisLeft(yScale);
 
-    xAxisGroup.call(xAxisGenerate);
-    yAxisGroup.call(yAxisGenerate);
+    xAxisGroup.transition().duration(500).call(xAxisGenerate);
+    yAxisGroup.transition().duration(500).call(yAxisGenerate);
 
     // data join => update selection
     const rects = svg.selectAll('rect').data(data);
 
     rects
       .exit() // => exit selection
-      .remove();
+        .attr('opacity', 1)
+      .transition().duration(500)
+        .attr('y', height)
+        .attr('height', 0)
+        .attr('opacity', 0)
+        .remove();
 
     rects
+      .transition().duration(500)
       .attr('x', d => xScale(d.name))
       .attr('y', d => yScale(d.height))
       .attr('width', xScale.bandwidth)
@@ -110,10 +119,12 @@ export default class D3Chart {
     rects
       .enter() // => enter selection
       .append('rect')
-      .attr('x', d => xScale(d.name))
-      .attr('y', d => yScale(d.height))
-      .attr('width', xScale.bandwidth)
-      .attr('height', d => height - yScale(d.height))
-      .attr('fill', d => 'grey');
+        .attr('x', d => xScale(d.name))
+        .attr('y', height)
+        .attr('width', xScale.bandwidth)
+        .attr('fill', d => 'grey')
+      .transition().duration(500)
+        .attr('y', d => yScale(d.height))
+        .attr('height', d => height - yScale(d.height));
   }
 }
