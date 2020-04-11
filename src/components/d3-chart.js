@@ -1,35 +1,35 @@
 import * as d3 from 'd3';
 
-const url = 'http://localhost:4000/ages';
+const url = 'http://localhost:4000/tallestMen';
 
 /* Sample Data from the above url
 [
   {
-    "age": "10",
-    "name": "Tony"
+    "height": "272",
+    "name": "Robert Wadlow"
   },
   {
-    "age": "12",
-    "name": "Jessica"
+    "height": "267",
+    "name": "John Rogan"
   },
   {
-    "age": "9",
-    "name": "Andrew"
+    "height": "263.5",
+    "name": "John Carroll"
   },
   {
-    "age": "10",
-    "name": "Emily"
+    "height": "257",
+    "name": "Leonid Stadnyk"
   },
   {
-    "age": "11",
-    "name": "Richard"
+    "height": "251.4",
+    "name": "Väinö Myllyrinne"
   }
-]
+]]
 */
 
 export default class D3Chart {
   constructor(element) {
-    const svg = d3.select(element.current).append('svg').attr('width', 500).attr('height', 500);
+    const svg = d3.select(element.current).append('svg').attr('width', 800).attr('height', 500);
 
     d3.json(url).then(data => {
       svg
@@ -38,10 +38,10 @@ export default class D3Chart {
         .enter()
         .append('rect')
         .attr('x', (d, i) => i * 100)
-        .attr('y', 50)
+        .attr('y', 0)
         .attr('width', 50)
-        .attr('height', d => d.age * 10)
-        .attr('fill', d => (d.age > 10 ? 'red' : 'green'));
+        .attr('height', d => d.height)
+        .attr('fill', d => 'grey');
     });
   }
 }
