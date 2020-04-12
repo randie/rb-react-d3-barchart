@@ -27,7 +27,7 @@ function App() {
         </Row>
         <Row>
           <Col xs={12}>
-            <Chart />
+            <Chart gender={gender} />
           </Col>
         </Row>
       </Container>

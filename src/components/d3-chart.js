@@ -30,7 +30,8 @@ const width = 800;
 const height = 500;
 
 export default class D3Chart {
-  constructor(element) {
+  constructor(element, gender) {
+    /*
     const svg = d3
       .select(element.current)
       .append('svg')
@@ -38,6 +39,13 @@ export default class D3Chart {
         .attr('height', height + margin.top + margin.bottom)
       .append('g')
         .attr('transform', `translate(${margin.left}, ${margin.right})`);
+    */
+
+    const svg = d3
+      .select(element.current)
+      .attr('width', width + margin.left + margin.right)
+      .attr('height', height + margin.top + margin.bottom)
+      .append('g').attr('transform', `translate(${margin.left}, ${margin.right})`);
 
     this.xAxisGroup = svg.append('g').attr('transform', `translate(0, ${height})`);
     this.yAxisGroup = svg.append('g');
@@ -62,7 +70,8 @@ export default class D3Chart {
     Promise.all([
       d3.json('http://localhost:4000/tallest-men'),
       d3.json('http://localhost:4000/tallest-women'),
-    ]).then(data => {
+    ]).then(([men, women]) => {
+      /*
       let i = 0;
       this.update(data[i]);
       d3.interval(() => {
@@ -71,14 +80,18 @@ export default class D3Chart {
         i = (i + 1) % 2;
         this.update(data[i]);
       }, 1000);
+      */
+      this.data = { men, women };
+      this.update(gender)
     }).catch(error => {
       // TODO
       window.alert('Oops! Failed to retrieve data. Is the database running?')
     });
   }
 
-  update(data) {
+  update(gender) {
     const { svg, xAxisGroup, yAxisGroup } = this;
+    const data = this.data[gender];
 
     const xScale = d3
       .scaleBand()
