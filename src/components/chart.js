@@ -29,11 +29,7 @@ import D3Chart from './d3-chart';
 
 class Chart extends Component {
   state = { chart: null };
-
-  constructor(props) {
-    super(props);
-    this.svgRef = createRef();
-  }
+  svgRef = createRef();
 
   componentDidMount() {
     this.setState({
@@ -41,14 +37,14 @@ class Chart extends Component {
     });
   }
 
-  // FIXME: Is this ok/safe to use?
-  shouldComponentUpdate() {
-    return false;
+  // FIXME: See https://fb.me/react-unsafe-component-lifecycles
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    this.state.chart.update(nextProps.gender);
   }
 
-  // FIXME: See https://fb.me/react-unsafe-component-lifecycles
-  componentWillReceiveProps(nextProps) {
-    this.state.chart.update(nextProps.gender);
+  // FIXME: Is this ok to use?
+  shouldComponentUpdate() {
+    return false;
   }
 
   render() {
