@@ -30,19 +30,9 @@ const width = 800;
 const height = 500;
 
 export default class D3Chart {
-  constructor(element, gender) {
-    /*
+  constructor(container, gender) {
     const svg = d3
-      .select(element.current)
-      .append('svg')
-        .attr('width', width + margin.left + margin.right)
-        .attr('height', height + margin.top + margin.bottom)
-      .append('g')
-        .attr('transform', `translate(${margin.left}, ${margin.right})`);
-    */
-
-    const svg = d3
-      .select(element.current)
+      .select(container)
       .attr('width', width + margin.left + margin.right)
       .attr('height', height + margin.top + margin.bottom)
       .append('g').attr('transform', `translate(${margin.left}, ${margin.right})`);
@@ -71,16 +61,6 @@ export default class D3Chart {
       d3.json('http://localhost:4000/tallest-men'),
       d3.json('http://localhost:4000/tallest-women'),
     ]).then(([men, women]) => {
-      /*
-      let i = 0;
-      this.update(data[i]);
-      d3.interval(() => {
-        // i will alternate between 0 and 1, alternating the
-        // data between tallest men and tallest women
-        i = (i + 1) % 2;
-        this.update(data[i]);
-      }, 1000);
-      */
       this.data = { men, women };
       this.update(gender)
     }).catch(error => {
@@ -138,7 +118,7 @@ export default class D3Chart {
         .attr('x', d => xScale(d.name))
         .attr('y', height)
         .attr('width', xScale.bandwidth)
-        .attr('fill', d => 'grey')
+        .attr('fill', d => '#aaa')
       .transition().duration(500)
         .attr('y', d => yScale(d.height))
         .attr('height', d => height - yScale(d.height));
