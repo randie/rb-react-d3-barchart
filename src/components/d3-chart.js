@@ -25,17 +25,19 @@ import * as d3 from 'd3';
 ]]
 */
 
-const margin = { top: 10, right: 10, bottom: 60, left: 60 };
 const width = 800;
 const height = 500;
+const margin = { top: 10, right: 10, bottom: 60, left: 60 };
+const transitionTime = 400;
 
 export default class D3Chart {
   constructor(container, gender) {
     const svg = d3
       .select(container)
-      .attr('width', width + margin.left + margin.right)
-      .attr('height', height + margin.top + margin.bottom)
-      .append('g').attr('transform', `translate(${margin.left}, ${margin.right})`);
+        .attr('width', width + margin.left + margin.right)
+        .attr('height', height + margin.top + margin.bottom)
+      .append('g')
+        .attr('transform', `translate(${margin.left}, ${margin.right})`);
 
     this.xAxisGroup = svg.append('g').attr('transform', `translate(0, ${height})`);
     this.yAxisGroup = svg.append('g');
@@ -90,8 +92,8 @@ export default class D3Chart {
     const xAxisGenerate = d3.axisBottom(xScale).tickSize(0).tickPadding(6);
     const yAxisGenerate = d3.axisLeft(yScale);
 
-    xAxisGroup.transition().duration(500).call(xAxisGenerate);
-    yAxisGroup.transition().duration(500).call(yAxisGenerate);
+    xAxisGroup.transition().duration(transitionTime).call(xAxisGenerate);
+    yAxisGroup.transition().duration(transitionTime).call(yAxisGenerate);
 
     // data join => update selection
     const rects = svg.selectAll('rect').data(data);
@@ -99,18 +101,18 @@ export default class D3Chart {
     rects
       .exit() // => exit selection
         .attr('opacity', 1)
-      .transition().duration(500)
+      .transition().duration(transitionTime)
         .attr('y', height)
         .attr('height', 0)
         .attr('opacity', 0)
         .remove();
 
     rects
-      .transition().duration(500)
-      .attr('x', d => xScale(d.name))
-      .attr('y', d => yScale(d.height))
-      .attr('width', xScale.bandwidth)
-      .attr('height', d => height - yScale(d.height));
+      .transition().duration(transitionTime)
+        .attr('x', d => xScale(d.name))
+        .attr('y', d => yScale(d.height))
+        .attr('width', xScale.bandwidth)
+        .attr('height', d => height - yScale(d.height));
 
     rects
       .enter() // => enter selection
@@ -119,7 +121,7 @@ export default class D3Chart {
         .attr('y', height)
         .attr('width', xScale.bandwidth)
         .attr('fill', d => '#aaa')
-      .transition().duration(500)
+      .transition().duration(transitionTime)
         .attr('y', d => yScale(d.height))
         .attr('height', d => height - yScale(d.height));
   }
