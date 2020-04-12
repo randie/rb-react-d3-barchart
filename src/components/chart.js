@@ -41,11 +41,13 @@ class Chart extends Component {
     });
   }
 
+  // FIXME: Is this ok/safe to use?
   shouldComponentUpdate() {
     return false;
   }
 
-  componentWillReceiveProps(nextProps, prevProps) {
+  // FIXME: See https://fb.me/react-unsafe-component-lifecycles
+  componentWillReceiveProps(nextProps) {
     this.state.chart.update(nextProps.gender);
   }
 

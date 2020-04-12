@@ -19,7 +19,6 @@ function App() {
         <Navbar.Brand>Barchart</Navbar.Brand>
       </Navbar>
       <Container>
-        <p>gender: {gender}</p>
         <Row>
           <Col xs={12}>
             <GenderButtons onGenderSelected={handleGenderSelected} />
