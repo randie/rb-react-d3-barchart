@@ -42,7 +42,7 @@ export default class D3Chart {
     this.xAxisGroup = svg.append('g').attr('transform', `translate(0, ${height})`);
     this.yAxisGroup = svg.append('g');
 
-    this.xAxisText = svg
+    this.xAxisLabel = svg
       .append('text')
         .attr('x', width / 2)
         .attr('y', height + 44)
@@ -71,7 +71,7 @@ export default class D3Chart {
   }
 
   update(gender) {
-    const { svg, xAxisGroup, yAxisGroup, xAxisText } = this;
+    const { svg, xAxisGroup, yAxisGroup, xAxisLabel } = this;
     const data = this.data[gender];
 
     const xScale = d3
@@ -94,7 +94,7 @@ export default class D3Chart {
     xAxisGroup.transition().duration(transitionTime).call(xAxisGenerate);
     yAxisGroup.transition().duration(transitionTime).call(yAxisGenerate);
 
-    xAxisText.text(`The world's tallest ${gender}`);
+    xAxisLabel.text(`The world's tallest ${gender}`);
 
     // data join => update selection
     const rects = svg.selectAll('rect').data(data);
